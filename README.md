@@ -6,11 +6,11 @@ This project was intended as an exercise in developing rainmeter skins. I wanted
 
 ## Installing
 
-* Download and place entire `breadbeard` folder in your Rainmeter skins location
-* Activate `breadbeard` skin
+* Download and place entire `rainmeter-todo-list` folder in your Rainmeter skins location
+* Activate `rainmeter-todo-list` skin
     * I do this by right-clicking on an already active skin to bring up the Rainmeter menu
-    * Navigate to `Rainmeter > Skins > breadbeard > todo > todo.ini`
-        * If you do not see `breadbeard` in the skin selection, try navigating to `Rainmeter > Refresh all`
+    * Navigate to `Rainmeter > Skins > rainmeter-todo-list > todo > todo.ini`
+        * If you do not see `rainmeter-todo-list` in the skin selection, try navigating to `Rainmeter > Refresh all`
 
 ## Usage
 
