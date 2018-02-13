@@ -18,7 +18,7 @@ This project was intended as an exercise in developing rainmeter skins. I wanted
 * Reset button can be used to reset the status of all tasks and remove completed, non-recurring tasks
 * Add button will allow you to add more tasks without editing the `tasks.txt` file directly
 
-![Add Tasks](https://media.giphy.com/media/xThtanJMYK18X4FhHW/giphy.gif)
+![Add Tasks](https://media.giphy.com/media/xUOwGbzv0eEO8hR0gU/giphy.gif)
 
 ![Complete Tasks](https://media.giphy.com/media/xThtamv5gqTqBkDL3y/giphy.gif)
 
