@@ -18,6 +18,12 @@ This project was intended as an exercise in developing rainmeter skins. I wanted
 * Reset button can be used to reset the status of all tasks and remove completed, non-recurring tasks
 * Add button will allow you to add more tasks without editing the `tasks.txt` file directly
 
+![Add Tasks](https://media.giphy.com/media/xThtanJMYK18X4FhHW/giphy.gif)
+
+![Complete Tasks](https://media.giphy.com/media/xThtamv5gqTqBkDL3y/giphy.gif)
+
+![Clear Completed Tasks](https://media.giphy.com/media/3ohs4BlgX5wHu3YIco/giphy.gif)
+
 ## Editing Tasks Directly
 
 A quick way to get to the correct file path is to right-click the todo list and select `Manage skin` from Rainmeter's menu. Now right-click the `todo` folder and select `Open folder` - an explorer window should open you right to the txt location.
