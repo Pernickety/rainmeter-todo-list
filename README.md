@@ -35,7 +35,7 @@ A quick way to get to the correct file path is to right-click the todo list and 
 
 Once you are done editing the file you can save and close it. Now click the Refresh button (furthest left) below the task list. Your changes should now be visible.
 
-## Coming Soon
+## Planned Updates
 
 * Ability to delete tasks
 * Ability to set/unset tasks as recurring
