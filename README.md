@@ -38,5 +38,10 @@ Once you are done editing the file you can save and close it. Now click the Refr
 ## Planned Updates
 
 * Ability to delete tasks
+* Ability to reorder tasks
 * Ability to set/unset tasks as recurring
 * Ability to save task status as CSV for record keeping/analytics
+* Task action/completion log
+* Right aligned variant
+* Option to use custom fonts
+* !random
