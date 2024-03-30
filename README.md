@@ -39,11 +39,11 @@ Once you are done editing the file you can save and close it. Now click the Refr
 
 By editing the value for `Alignment` in `todo.ini` you can adjust the alignment of the tasks and action buttons.
 
-`ltr` - default, left align
-`rtl` - right aligned checkboxes and action buttons, tasks text left aligned within task text field
+ltr - default, left align
+rtl - right aligned checkboxes and action buttons, tasks text left aligned within task text field
 
 > [!NOTE]
-> Any value other than `ltr` can be used for right alignment
+> Any value other than "ltr" can be used for right alignment
 
 ## Task Width
 
@@ -52,12 +52,12 @@ By editing the value for `TaskWidth` in `todo.ini` you can adjust the width of t
 
 ## Planned Updates
 
-[] Ability to delete tasks
-[] Ability to reorder tasks
-[] Ability to set/unset tasks as recurring
-[] Ability to save task status as CSV for record keeping/analytics
-[] Task action/completion log
-[x] #4
+- [] Ability to delete tasks
+- [] Ability to reorder tasks
+- [] Ability to set/unset tasks as recurring
+- [] Ability to save task status as CSV for record keeping/analytics
+- [] Task action/completion log
+- [x] #4
     - [] Additional style/alignment work
-[] Option to use custom fonts
-[] !random
+- [] Option to use custom fonts
+- [] !random
