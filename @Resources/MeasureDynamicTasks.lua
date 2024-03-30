@@ -2,6 +2,8 @@ function Initialize()
 
 	sDynamicMeterFile = SELF:GetOption('DynamicMeterFile')
 	sTaskListFile = SELF:GetOption('TaskListFile')
+	sAlignment = SELF:GetOption('Alignment')
+	sTaskWidth = SELF:GetOption('TaskWidth')
 	
 end
 
@@ -18,13 +20,13 @@ function Update()
 
 		-- check if the task is complete
 		if string.sub(line,1,1) == "+" then 
-			checked = checked.."|"..#tasks
+			checked = checked.."|"..#tasks+1
 			line = string.sub(line,2,string.len(line))
 		end
 
 		-- check if the task is recurring
 		if string.sub(line,-2,-1) == "|R" then
-			recurring = recurring.."|"..#tasks
+			recurring = recurring.."|"..#tasks+1
 			line = string.sub(line,1,-3)
 		end
 
@@ -48,36 +50,69 @@ function Update()
 
 	-- dynamic meters
 	for i=1,#tasks,1 do
-		dynamicOutput[#dynamicOutput + 1] = "[MeterTaskIcon"..i.."]"
-		dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-		dynamicOutput[#dynamicOutput + 1] = "MeasureName=MeasureTaskIcon"..i
-		dynamicOutput[#dynamicOutput + 1] = "Text=[#[#check"..i.."]]"
-		dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
-		dynamicOutput[#dynamicOutput + 1] = "FontSize=18"
-		dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
-		dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
-		dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
-		dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
-		dynamicOutput[#dynamicOutput + 1] = "X=0"
-		dynamicOutput[#dynamicOutput + 1] = "Y=R"
-		dynamicOutput[#dynamicOutput + 1] = "H=24"
-		dynamicOutput[#dynamicOutput + 1] = "W=30"
-		dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!SetVariable check"..i.."state (1-#check"..i.."state#)][!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"]"
-		dynamicOutput[#dynamicOutput + 1] = "DynamicVariables=1"
-		dynamicOutput[#dynamicOutput + 1] = "[MeterRepeatingTask"..i.."]"
-		dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-		dynamicOutput[#dynamicOutput + 1] = "Text="..tasks[i]
-		dynamicOutput[#dynamicOutput + 1] = "FontFace=Roboto"
-		dynamicOutput[#dynamicOutput + 1] = "FontSize=16"
-		dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
-		dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
-		dynamicOutput[#dynamicOutput + 1] = "StringStyle=Bold"
-		dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
-		dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
-		dynamicOutput[#dynamicOutput + 1] = "X=R"
-		dynamicOutput[#dynamicOutput + 1] = "Y=r"
-		dynamicOutput[#dynamicOutput + 1] = "H=24"
-		dynamicOutput[#dynamicOutput + 1] = "W=300"
+		if sAlignment == "ltr" then
+			dynamicOutput[#dynamicOutput + 1] = "[MeterTaskIcon"..i.."]"
+			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
+			dynamicOutput[#dynamicOutput + 1] = "MeasureName=MeasureTaskIcon"..i
+			dynamicOutput[#dynamicOutput + 1] = "Text=[#[#check"..i.."]]"
+			dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
+			dynamicOutput[#dynamicOutput + 1] = "FontSize=18"
+			dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
+			dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
+			dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
+			dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
+			dynamicOutput[#dynamicOutput + 1] = "X=0"
+			dynamicOutput[#dynamicOutput + 1] = "Y=R"
+			dynamicOutput[#dynamicOutput + 1] = "H=24"
+			dynamicOutput[#dynamicOutput + 1] = "W=30"
+			dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!SetVariable check"..i.."state (1-#check"..i.."state#)][!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"]"
+			dynamicOutput[#dynamicOutput + 1] = "DynamicVariables=1"
+			dynamicOutput[#dynamicOutput + 1] = "[MeterRepeatingTask"..i.."]"
+			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
+			dynamicOutput[#dynamicOutput + 1] = "Text="..tasks[i]
+			dynamicOutput[#dynamicOutput + 1] = "FontFace=Roboto"
+			dynamicOutput[#dynamicOutput + 1] = "FontSize=16"
+			dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
+			dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
+			dynamicOutput[#dynamicOutput + 1] = "StringStyle=Bold"
+			dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
+			dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
+			dynamicOutput[#dynamicOutput + 1] = "X=R"
+			dynamicOutput[#dynamicOutput + 1] = "Y=r"
+			dynamicOutput[#dynamicOutput + 1] = "H=24"
+			dynamicOutput[#dynamicOutput + 1] = "W="..sTaskWidth
+		else
+			dynamicOutput[#dynamicOutput + 1] = "[MeterRepeatingTask"..i.."]"
+			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
+			dynamicOutput[#dynamicOutput + 1] = "Text="..tasks[i]
+			dynamicOutput[#dynamicOutput + 1] = "FontFace=Roboto"
+			dynamicOutput[#dynamicOutput + 1] = "FontSize=16"
+			dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
+			dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
+			dynamicOutput[#dynamicOutput + 1] = "StringStyle=Bold"
+			dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
+			dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
+			dynamicOutput[#dynamicOutput + 1] = "X=0"
+			dynamicOutput[#dynamicOutput + 1] = "Y=R"
+			dynamicOutput[#dynamicOutput + 1] = "H=24"
+			dynamicOutput[#dynamicOutput + 1] = "W="..sTaskWidth
+			dynamicOutput[#dynamicOutput + 1] = "[MeterTaskIcon"..i.."]"
+			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
+			dynamicOutput[#dynamicOutput + 1] = "MeasureName=MeasureTaskIcon"..i
+			dynamicOutput[#dynamicOutput + 1] = "Text=[#[#check"..i.."]]"
+			dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
+			dynamicOutput[#dynamicOutput + 1] = "FontSize=18"
+			dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
+			dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
+			dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
+			dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
+			dynamicOutput[#dynamicOutput + 1] = "X=R"
+			dynamicOutput[#dynamicOutput + 1] = "Y=r"
+			dynamicOutput[#dynamicOutput + 1] = "H=24"
+			dynamicOutput[#dynamicOutput + 1] = "W=30"
+			dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!SetVariable check"..i.."state (1-#check"..i.."state#)][!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"]"
+			dynamicOutput[#dynamicOutput + 1] = "DynamicVariables=1"
+		end
 	end
 
 	dynamicOutput[#dynamicOutput + 1] = "[Variables]"
@@ -106,7 +141,11 @@ function Update()
 	dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
 	dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
 	dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
-	dynamicOutput[#dynamicOutput + 1] = "X=0"
+	if sAlignment == "ltr" then
+		dynamicOutput[#dynamicOutput + 1] = "X=0"
+	else
+		dynamicOutput[#dynamicOutput + 1] = "X=-60r"
+	end
 	dynamicOutput[#dynamicOutput + 1] = "Y=15R"
 	dynamicOutput[#dynamicOutput + 1] = "W=30"
 	dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!Refresh][!Refresh]"
@@ -121,7 +160,11 @@ function Update()
 	dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
 	dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
 	dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
-	dynamicOutput[#dynamicOutput + 1] = "X=R"
+	if sAlignment == "ltr" then
+		dynamicOutput[#dynamicOutput + 1] = "X=R"
+	else
+		dynamicOutput[#dynamicOutput + 1] = "X=30r"
+	end
 	dynamicOutput[#dynamicOutput + 1] = "Y=r"
 	dynamicOutput[#dynamicOutput + 1] = "W=30"
 	dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!CommandMeasure \"MeasureDynamicTasks\" \"ResetAll()\"][!Refresh][!Refresh]"
@@ -136,7 +179,11 @@ function Update()
 	dynamicOutput[#dynamicOutput + 1] = "SolidColor=0,0,0,1"
 	dynamicOutput[#dynamicOutput + 1] = "AntiAlias=1"
 	dynamicOutput[#dynamicOutput + 1] = "ClipString=1"
-	dynamicOutput[#dynamicOutput + 1] = "X=R"
+	if sAlignment == "ltr" then
+		dynamicOutput[#dynamicOutput + 1] = "X=R"
+	else
+		dynamicOutput[#dynamicOutput + 1] = "X=30r"
+	end
 	dynamicOutput[#dynamicOutput + 1] = "Y=r"
 	dynamicOutput[#dynamicOutput + 1] = "W=30"
 	dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!CommandMeasure MeasureInput \"ExecuteBatch 1-2\"]"
