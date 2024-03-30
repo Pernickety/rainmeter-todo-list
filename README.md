@@ -57,7 +57,7 @@ By editing the value for `TaskWidth` in `todo.ini` you can adjust the width of t
 - [ ] Ability to set/unset tasks as recurring
 - [ ] Ability to save task status as CSV for record keeping/analytics
 - [ ] Task action/completion log
-- [x] #4
+- [x] [Alligned to right? #4](https://github.com/Pernickety/rainmeter-todo-list/issues/4)
     - [ ] Additional style/alignment work
 - [ ] Option to use custom fonts
 - [ ] !random
