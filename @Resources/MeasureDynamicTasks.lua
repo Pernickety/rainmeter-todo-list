@@ -36,25 +36,16 @@ function Update()
 	-- add delimeter to end of checked string
 	checked=checked.."|"
 
-	-- dynamic measures checking task status
-	for i=1,#tasks,1 do 
-		dynamicOutput[#dynamicOutput + 1] = "[MeasureTaskIcon"..i.."]"
-		dynamicOutput[#dynamicOutput + 1] = "Measure=String"
-		dynamicOutput[#dynamicOutput + 1] = "String=#check"..i.."state#"
-		dynamicOutput[#dynamicOutput + 1] = "IfMatch=0"
-		dynamicOutput[#dynamicOutput + 1] = "IfMatchAction=[!SetVariable check"..i.." fa-sq]"
-		dynamicOutput[#dynamicOutput + 1] = "IfNotMatchAction=[!SetVariable check"..i.." fa-check-sq]"
-		dynamicOutput[#dynamicOutput + 1] = "IfMatchMode=1"
-		dynamicOutput[#dynamicOutput + 1] = "DynamicVariables=1"
-	end
-
 	-- dynamic meters
 	for i=1,#tasks,1 do
 		if sAlignment == "ltr" then
 			dynamicOutput[#dynamicOutput + 1] = "[MeterTaskIcon"..i.."]"
 			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-			dynamicOutput[#dynamicOutput + 1] = "MeasureName=MeasureTaskIcon"..i
-			dynamicOutput[#dynamicOutput + 1] = "Text=[#[#check"..i.."]]"
+			if string.find(checked, "|"..i.."|") ~= nil then
+				dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-check-sq]]"
+			else
+				dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-sq]]"
+			end
 			dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
 			dynamicOutput[#dynamicOutput + 1] = "FontSize=18"
 			dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
@@ -65,7 +56,7 @@ function Update()
 			dynamicOutput[#dynamicOutput + 1] = "Y=R"
 			dynamicOutput[#dynamicOutput + 1] = "H=24"
 			dynamicOutput[#dynamicOutput + 1] = "W=30"
-			dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!SetVariable check"..i.."state (1-#check"..i.."state#)][!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"]"
+			dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"][!Refresh][!Refresh]"
 			dynamicOutput[#dynamicOutput + 1] = "DynamicVariables=1"
 			dynamicOutput[#dynamicOutput + 1] = "[MeterRepeatingTask"..i.."]"
 			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
@@ -98,8 +89,11 @@ function Update()
 			dynamicOutput[#dynamicOutput + 1] = "W="..sTaskWidth
 			dynamicOutput[#dynamicOutput + 1] = "[MeterTaskIcon"..i.."]"
 			dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-			dynamicOutput[#dynamicOutput + 1] = "MeasureName=MeasureTaskIcon"..i
-			dynamicOutput[#dynamicOutput + 1] = "Text=[#[#check"..i.."]]"
+			if string.find(checked, "|"..i.."|") ~= nil then
+				dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-check-sq]]"
+			else
+				dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-sq]]"
+			end
 			dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
 			dynamicOutput[#dynamicOutput + 1] = "FontSize=18"
 			dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
@@ -110,21 +104,8 @@ function Update()
 			dynamicOutput[#dynamicOutput + 1] = "Y=r"
 			dynamicOutput[#dynamicOutput + 1] = "H=24"
 			dynamicOutput[#dynamicOutput + 1] = "W=30"
-			dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!SetVariable check"..i.."state (1-#check"..i.."state#)][!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"]"
+			dynamicOutput[#dynamicOutput + 1] = "LeftMouseUpAction=[!CommandMeasure \"MeasureDynamicTasks\" \"CheckLine("..i..")\"][!Refresh][!Refresh]"
 			dynamicOutput[#dynamicOutput + 1] = "DynamicVariables=1"
-		end
-	end
-
-	dynamicOutput[#dynamicOutput + 1] = "[Variables]"
-
-	-- variables for each task
-	for i=1,#tasks,1 do
-		if string.find(checked, "|"..i.."|") ~= nil then
-			dynamicOutput[#dynamicOutput + 1] = "check"..i.."state=1"
-			dynamicOutput[#dynamicOutput + 1] = "check"..i.."=fa-check-sq"
-		else
-			dynamicOutput[#dynamicOutput + 1] = "check"..i.."state=0"
-			dynamicOutput[#dynamicOutput + 1] = "check"..i.."=fa-sq"
 		end
 	end
 
@@ -134,7 +115,7 @@ function Update()
 	-- refresh button
 	dynamicOutput[#dynamicOutput + 1] = "[MeterRefreshTasks]"
 	dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-	dynamicOutput[#dynamicOutput + 1] = "Text=#fa-refresh#"
+	dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-refresh]]"
 	dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
 	dynamicOutput[#dynamicOutput + 1] = "FontSize=16"
 	dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
@@ -153,7 +134,7 @@ function Update()
 	-- reset button
 	dynamicOutput[#dynamicOutput + 1] = "[MeterUndoTasks]"
 	dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-	dynamicOutput[#dynamicOutput + 1] = "Text=#fa-undo#"
+	dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-undo]]"
 	dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
 	dynamicOutput[#dynamicOutput + 1] = "FontSize=16"
 	dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
@@ -172,7 +153,7 @@ function Update()
 	-- add button
 	dynamicOutput[#dynamicOutput + 1] = "[MeterAddTasks]"
 	dynamicOutput[#dynamicOutput + 1] = "Meter=String"
-	dynamicOutput[#dynamicOutput + 1] = "Text=#fa-plus-sq#"
+	dynamicOutput[#dynamicOutput + 1] = "Text=[\\[#fa-plus-sq]]"
 	dynamicOutput[#dynamicOutput + 1] = "FontFace=FontAwesome"
 	dynamicOutput[#dynamicOutput + 1] = "FontSize=16"
 	dynamicOutput[#dynamicOutput + 1] = "FontColor=255,255,255,255"
